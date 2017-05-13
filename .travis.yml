@@ -4,6 +4,8 @@ node_js:
 os: linux		
 dist: trusty		
 sudo: required
+services:
+  - docker
 dotnet: 1.0.1
 install:
 - dotnet restore
