@@ -17,7 +17,6 @@ notifications:
     on_failure: always
 script:
 - dotnet publish -c Release -o out
-- docker build -t DockerSample
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export REPO=siddharthashw/Docker-demo
