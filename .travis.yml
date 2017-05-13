@@ -19,8 +19,5 @@ script:
 - dotnet publish -c Release -o out
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $DOCKER_USER$REPO:$COMMIT .
-  - docker tag $DOCKER_USER$REPO:$COMMIT $DOCKER_USER$REPO:$TAG
-  - docker tag $DOCKER_USER$REPO:$COMMIT $DOCKER_USER$REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker build -f Dockerfile -t $DOCKER_USER$REPO: .
   - docker push $DOCKER_USER$REPO
