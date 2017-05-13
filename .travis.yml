@@ -5,9 +5,6 @@ os: linux
 dist: trusty		
 sudo: required
 dotnet: 1.0.1
-before_install:
-- export CHROME_BIN=chromium-browser
-- export DISPLAY=:99.0
 install:
 - dotnet restore
 before_script:
@@ -18,5 +15,12 @@ notifications:
     on_failure: always
 script:
 - dotnet publish -c Release -o out
-- docker build -t Docker.Web
-- docker run -it --rm Docker.Web
+- docker build -t DockerSample
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=siddharthashw/Docker-demo
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
