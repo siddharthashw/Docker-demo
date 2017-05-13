@@ -16,7 +16,7 @@ before_script:
 solution: "./Docker.Web/Docker.Web.sln"
 notifications:
   email:
-    on_success: change
+    on_success: always
     on_failure: always
 script:
 - dotnet publish -c Release -o out
