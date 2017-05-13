@@ -4,6 +4,8 @@ node_js:
 os: linux		
 dist: trusty		
 sudo: required
+services:
+  - docker
 dotnet: 1.0.1
 before_install:
 - export CHROME_BIN=chromium-browser
@@ -14,7 +16,7 @@ before_script:
 solution: "./Docker.Web/Docker.Web.sln"
 notifications:
   email:
-    on_success: change
+    on_success: always
     on_failure: always
 script:
 - dotnet publish -c Release -o out
