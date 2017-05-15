@@ -22,3 +22,5 @@ after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - docker build -f Dockerfile -t $DOCKER_USER$REPO .
   - docker push $DOCKER_USER$REPO
+  - cd "./Docker.Web/"
+  - ls
