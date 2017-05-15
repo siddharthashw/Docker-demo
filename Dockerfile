@@ -1,4 +1,4 @@
 FROM microsoft/dotnet:latest
 WORKDIR /app
-COPY out .
+COPY ./Docker.Web/out .
 ENTRYPOINT ["dotnet", "Docker.Web.dll"]
